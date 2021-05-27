@@ -5,6 +5,8 @@ from django.db.models.deletion import PROTECT
 # Create your models here.
 class GoalStatus(models.Model):
     status_name = models.CharField(max_length=50)
+    def __str__(self):
+         return self.status_name 
 
 
 
@@ -17,7 +19,9 @@ class ScrumyGoals(models.Model):
     goal_status = models.ForeignKey(GoalStatus, on_delete=PROTECT)
     user = models.ForeignKey(User, related_name="user_goal", on_delete=models.PROTECT)
 
-   
+    def __str__(self):
+        return self.goal_name
+
 
 class ScrumyHistory(models.Model):
     moved_by = models.CharField(max_length=50)
@@ -27,3 +31,5 @@ class ScrumyHistory(models.Model):
     time_of_action = models.DateField()
     goal = models.ForeignKey(ScrumyGoals, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.created_by
